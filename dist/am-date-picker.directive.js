@@ -3,7 +3,7 @@
 
     angular
         .module('am.date-picker')
-        .directive('amDatePicker', amDatePicker)
+        .directive('amDatePicker', amDatePicker);
 
     function amDatePicker() {
         return {
@@ -50,6 +50,12 @@
         amDatePicker.openPicker = openPicker;
 
         amDatePicker.ngModelCtrl = null;
+
+        amDatePicker.setValue = function setValue(value) {
+            amDatePicker.ngModelCtrl.$setViewValue(value);
+            amDatePicker.ngModelCtrl.$setTouched();
+            render();
+        };
 
         $scope.$watch("amDatePicker.minDate", function (newValue, oldValue) {
             var date = amDatePicker.ngModelCtrl.$viewValue,
