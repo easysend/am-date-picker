@@ -57,6 +57,7 @@
         }
 
         function cancel() {
+            dialog.onClose();
             $mdDialog.cancel();
         }
 
@@ -99,6 +100,7 @@
         }
 
         function hide() {
+            dialog.onClose();
             $mdDialog.hide(dialog.dateMoment.toDate());
         }
 
