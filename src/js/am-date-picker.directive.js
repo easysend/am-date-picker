@@ -49,6 +49,12 @@
 
         amDatePicker.ngModelCtrl = null;
 
+        amDatePicker.setValue = function setValue(value) {
+            amDatePicker.ngModelCtrl.$setViewValue(value);
+            amDatePicker.ngModelCtrl.$setTouched();
+            render();
+        };
+
         $scope.$watch("amDatePicker.minDate", function (newValue, oldValue) {
             var date = amDatePicker.ngModelCtrl.$viewValue,
                 dateMoment = moment(date);
