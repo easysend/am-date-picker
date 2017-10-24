@@ -47,7 +47,8 @@
   "_spec": "am-date-picker",
   "_where": "/var/www/panel",
   "dependencies": {
-    "angular": "^1.6.1"
+    "angular": "^1.6.1",
+    "moment": "^2.19.1"
   },
   "description": "Simple datepicker based on angular material framework",
   "devDependencies": {

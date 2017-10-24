@@ -3,7 +3,7 @@
 
     angular
         .module('am.date-picker')
-        .directive('amDatePicker', amDatePicker)
+        .directive('amDatePicker', amDatePicker);
 
     function amDatePicker() {
         return {
@@ -33,6 +33,8 @@
                 popupDateFormat: '@?amPopupDateFormat',
                 showInputIcon: '=?amShowInputIcon',
                 todayButton: '@?amTodayButton',
+                onOpen: '&',
+                onClose: '&'
             },
             templateUrl: 'am-date-picker.html'
         };
@@ -48,6 +50,12 @@
         amDatePicker.openPicker = openPicker;
 
         amDatePicker.ngModelCtrl = null;
+
+        amDatePicker.setValue = function setValue(value) {
+            amDatePicker.ngModelCtrl.$setViewValue(value);
+            amDatePicker.ngModelCtrl.$setTouched();
+            render();
+        };
 
         $scope.$watch("amDatePicker.minDate", function (newValue, oldValue) {
             var date = amDatePicker.ngModelCtrl.$viewValue,
@@ -98,6 +106,7 @@
         }
 
         function openPicker(ev) {
+            amDatePicker.onOpen();
             $mdDialog.show({
                 bindToController: true,
                 controller: 'amDatePickerDialogCtrl',
@@ -114,7 +123,8 @@
                     locale: amDatePicker.locale,
                     popupDateFormat: amDatePicker.popupDateFormat,
                     prevIcon: amDatePicker.prevIcon,
-                    todayButton: amDatePicker.todayButton
+                    todayButton: amDatePicker.todayButton,
+                    onClose: amDatePicker.onClose
                 },
                 parent: angular.element(document.body),
                 targetEvent: ev,

@@ -66,7 +66,7 @@ gulp.task('watch', function() {
 
 
 gulp.task('default', [
-    //'watch',
+    'watch',
     'images',
     'less',
     'scripts',
